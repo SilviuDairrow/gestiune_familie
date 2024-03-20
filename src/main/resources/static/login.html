@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+<h2>Login</h2>
+<form id="loginForm" onsubmit="submitForm(event)">
+
+    <label for="idLogin">Login ID:</label><br>
+    <input type="text" id="idLogin" name="idLogin"><br>
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password"><br><br>
+    <input type="submit" value="Login">
+
+</form>
+<br />
+<h2>Creeaza un cont nou</h2>
+<form id="createAccountForm" onsubmit="createAccount(event)">
+
+    <label for="newIdLogin">Login ID:</label><br>
+    <input type="text" id="newIdLogin" name="newIdLogin" required><br>
+    <label for="newPassword">Password:</label><br>
+    <input type="password" id="newPassword" name="newPassword" required><br>
+    <label for="firstName">First Name:</label><br>
+    <input type="text" id="firstName" name="firstName" required><br>
+    <label for="lastName">Last Name:</label><br>
+    <input type="text" id="lastName" name="lastName" required><br><br>
+    <input type="submit" value="Create Account">
+
+</form>
+    <script>
+        function submitForm(event) {
+            event.preventDefault();
+
+            const loginID = document.getElementById('idLogin').value;
+            const password = document.getElementById('password').value;
+
+            const url = `http://localhost:8080/login?idLogin=${loginID}&password=${password}`;
+
+            fetch(url, {
+                method: 'PUT'
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = '/agenda';
+                } else {
+                    alert('Login fail :(');
+                }
+            })
+            .catch(error => console.error('Eroar e: ', error));
+        }
+        function createAccount(event) {
+        event.preventDefault();
+
+        const newLoginID = document.getElementById('newIdLogin').value;
+        const newPassword = document.getElementById('newPassword').value;
+        const firstName = document.getElementById('firstName').value;
+        const lastName = document.getElementById('lastName').value;
+
+        const url = `http://localhost:8080/person`;
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                loginID: newLoginID,
+                password: newPassword,
+                firstName: firstName,
+                lastName: lastName
+            })
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Cont creeat cu succes B)');
+                location.reload();
+            } else {
+                alert('Fail bruh');
+            }
+        })
+        .catch(error => console.error('Eroare: ', error));
+    }
+    </script>
+</body>
+</html>
