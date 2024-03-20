@@ -1,2 +1,4 @@
 # gestiune_familie
-Aplicație cu front-end și back-end, cu trei servicii și un controller pentru a putea realiza manipularea datelor. Contine un serviciu de autentificare, unul pentru operatii CRUD asupra datelor si unul pentru encryptie.
+Aplicație cu trei servicii si un controller pentru gestionarea conturilor unei familii cu diferite aspecte financiare si nevoi, care pot fi editate dupa creearea contului. Aplicatia dispune si de un Login page care creeaza un loginToken necesar pentru navigarea aplicatiei. Daca nu exista un cont, se poate creea unul pe pagina de Login. Toate datele pe care le comunica utilizatorul cu controllerul (dupa login) dispun de o encryptie cu ajutorul EncryptionService-ului. Parolele sunt hashuite la login, la creerea contului si la editarea acesteia.
+Aplicatia ruleaza la localhost:8080/login.html
+Singurul aspect ce trebuie imbunatatit este navigarea prin aplicatie in cadrul browserului cu ajutorul unui Dashboard (exista dar nu e terminat astfel incat nu l-am atribuit inca aplicatiei).
